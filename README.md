@@ -44,44 +44,6 @@ _Encoder:_ Applies convolution + max pooling to progressively compress images.
 
 _Decoder:_ Uses convolution + upsampling to restore images to original size.
 
- Layer (type)                    ┃ Output Shape           ┃       Param # ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ input_layer (InputLayer)        │ (None, 32, 32, 3)      │             0 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ conv2d (Conv2D)                 │ (None, 32, 32, 32)     │           896 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ batch_normalization             │ (None, 32, 32, 32)     │           128 │
-│ (BatchNormalization)            │                        │               │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ max_pooling2d (MaxPooling2D)    │ (None, 16, 16, 32)     │             0 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ conv2d_1 (Conv2D)               │ (None, 16, 16, 32)     │         9,248 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ batch_normalization_1           │ (None, 16, 16, 32)     │           128 │
-│ (BatchNormalization)            │                        │               │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ max_pooling2d_1 (MaxPooling2D)  │ (None, 8, 8, 32)       │             0 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ conv2d_2 (Conv2D)               │ (None, 8, 8, 32)       │         9,248 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ batch_normalization_2           │ (None, 8, 8, 32)       │           128 │
-│ (BatchNormalization)            │                        │               │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ up_sampling2d (UpSampling2D)    │ (None, 16, 16, 32)     │             0 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ conv2d_3 (Conv2D)               │ (None, 16, 16, 32)     │         9,248 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ batch_normalization_3           │ (None, 16, 16, 32)     │           128 │
-│ (BatchNormalization)            │                        │               │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ up_sampling2d_1 (UpSampling2D)  │ (None, 32, 32, 32)     │             0 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ conv2d_4 (Conv2D)               │ (None, 32, 32, 3)      │           867 │
-└─────────────────────────────────┴────────────────────────┴───────────────┘
- Total params: 30,019 (117.26 KB)
- Trainable params: 29,763 (116.26 KB)
- Non-trainable params: 256 (1.00 KB)
-
 6.Includes Batch Normalization to stabilize and accelerate training.
 
 7.The output layer uses sigmoid activation to keep output pixels between 0 and 1.
@@ -117,8 +79,6 @@ _Histograms:_ Distribution of PSNR and SSIM scores to assess denoising quality a
 
 ![image](https://github.com/user-attachments/assets/0343362b-cfa2-4225-a91c-93190ff2ce0b)
 
-![image](https://github.com/user-attachments/assets/5efd59f2-c8a0-4d97-83ce-1b9bf4a458b1)
-
 
 **Gaussian Noise:** Simulating Real-World Distortions
 
@@ -151,6 +111,8 @@ Retains important features while discarding irrelevant details.
 Increases invariance to small shifts/distortions in the input.
 
 Helps prevent overfitting by simplifying feature maps.
+
+![image](https://github.com/user-attachments/assets/25665f63-57e4-41b3-aa75-995b9a1b497b)
 
 **How These Components Work Together in the Model**
 
