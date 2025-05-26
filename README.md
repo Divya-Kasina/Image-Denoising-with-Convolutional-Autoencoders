@@ -30,7 +30,7 @@ Over time, it discovers noise patterns and learns how to restore the clean detai
 
 1.Loading and Preparing Data.
 
-2.Loads a dataset of images (e.g., CIFAR-10).
+2.Loads a dataset of images (MNIST, CIFAR-10).
 
 3.Normalizes images so pixel values lie between 0 and 1.
 
@@ -71,7 +71,10 @@ Focuses on human perception of image quality, comparing structure, texture, and 
 _Loss Curves:_ Track training and validation MSE loss over epochs to monitor learning progress.
 
 ![image](https://github.com/user-attachments/assets/19b7f9b9-dc48-4c4e-bd47-55dcbe7487c8)
+for CIFAR-10 DATASET
 
+![image](https://github.com/user-attachments/assets/803f2c57-a717-4a70-aacd-b0dbf8749eb1)
+for MNIST DATASET
 
 _Image Grids:_ Side-by-side comparison of noisy inputs, denoised outputs, and original clean images.
 
@@ -79,6 +82,11 @@ _Histograms:_ Distribution of PSNR and SSIM scores to assess denoising quality a
 
 ![image](https://github.com/user-attachments/assets/0343362b-cfa2-4225-a91c-93190ff2ce0b)
 
+for CIFAR-10 DATASET
+
+![image](https://github.com/user-attachments/assets/79fa9ca2-9e13-4eca-b1a6-4ebbd444eb01)
+
+for MNIST DATASET (Average PSNR over 100 test samples: 20.48 dB)
 
 **Gaussian Noise:** Simulating Real-World Distortions
 
@@ -113,6 +121,12 @@ Increases invariance to small shifts/distortions in the input.
 Helps prevent overfitting by simplifying feature maps.
 
 ![image](https://github.com/user-attachments/assets/25665f63-57e4-41b3-aa75-995b9a1b497b)
+
+for CIFAR-10 DATASET
+
+![image](https://github.com/user-attachments/assets/bde1e302-060e-471e-a5a7-bed94dc93065)
+
+for MNIST DATASET
 
 **How These Components Work Together in the Model**
 
