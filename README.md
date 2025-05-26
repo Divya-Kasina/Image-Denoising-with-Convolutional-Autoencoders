@@ -44,6 +44,44 @@ _Encoder:_ Applies convolution + max pooling to progressively compress images.
 
 _Decoder:_ Uses convolution + upsampling to restore images to original size.
 
+ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ input_layer (InputLayer)        │ (None, 32, 32, 3)      │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ conv2d (Conv2D)                 │ (None, 32, 32, 32)     │           896 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ batch_normalization             │ (None, 32, 32, 32)     │           128 │
+│ (BatchNormalization)            │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ max_pooling2d (MaxPooling2D)    │ (None, 16, 16, 32)     │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ conv2d_1 (Conv2D)               │ (None, 16, 16, 32)     │         9,248 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ batch_normalization_1           │ (None, 16, 16, 32)     │           128 │
+│ (BatchNormalization)            │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ max_pooling2d_1 (MaxPooling2D)  │ (None, 8, 8, 32)       │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ conv2d_2 (Conv2D)               │ (None, 8, 8, 32)       │         9,248 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ batch_normalization_2           │ (None, 8, 8, 32)       │           128 │
+│ (BatchNormalization)            │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ up_sampling2d (UpSampling2D)    │ (None, 16, 16, 32)     │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ conv2d_3 (Conv2D)               │ (None, 16, 16, 32)     │         9,248 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ batch_normalization_3           │ (None, 16, 16, 32)     │           128 │
+│ (BatchNormalization)            │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ up_sampling2d_1 (UpSampling2D)  │ (None, 32, 32, 32)     │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ conv2d_4 (Conv2D)               │ (None, 32, 32, 3)      │           867 │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+ Total params: 30,019 (117.26 KB)
+ Trainable params: 29,763 (116.26 KB)
+ Non-trainable params: 256 (1.00 KB)
+
 6.Includes Batch Normalization to stabilize and accelerate training.
 
 7.The output layer uses sigmoid activation to keep output pixels between 0 and 1.
@@ -70,10 +108,16 @@ Focuses on human perception of image quality, comparing structure, texture, and 
 
 _Loss Curves:_ Track training and validation MSE loss over epochs to monitor learning progress.
 
+![image](https://github.com/user-attachments/assets/19b7f9b9-dc48-4c4e-bd47-55dcbe7487c8)
+
+
 _Image Grids:_ Side-by-side comparison of noisy inputs, denoised outputs, and original clean images.
 
 _Histograms:_ Distribution of PSNR and SSIM scores to assess denoising quality across samples.
 
+![image](https://github.com/user-attachments/assets/0343362b-cfa2-4225-a91c-93190ff2ce0b)
+
+![image](https://github.com/user-attachments/assets/5efd59f2-c8a0-4d97-83ce-1b9bf4a458b1)
 
 
 **Gaussian Noise:** Simulating Real-World Distortions
